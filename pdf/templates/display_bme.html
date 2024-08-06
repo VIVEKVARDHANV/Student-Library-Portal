@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Display PDF Files</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        window.onload = function () {
+            var successMessage = "{{ success_message }}";
+            if (successMessage && successMessage !== 'None') {
+                alert(successMessage);
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-cover bg-no-repeat" style="background-image: url('https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=1200')">
+
+    <div class="container mx-auto px-4 py-8 mt-24">
+        <form class="mb-8 flex justify-center">
+            <input type="text" name="prompt" class="p-2 border rounded w-2/3 shadow focus:outline-none focus:border-blue-400">
+            <button type="submit" class="bg-blue-600 text-white p-2 rounded ml-2 transition-transform transform hover:scale-105 focus:outline-none">Ask Llama</button>
+        </form>
+
+        {% if llama_response %}
+        <div class="mb-8 text-center">
+            <h2 class="text-xl font-bold mb-4">Llama Response:</h2>
+            <p class="bg-white p-4 rounded shadow mx-auto w-2/3">{{ llama_response }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="mt-8 text-center">
+            <a href="{% url 'reward_selection' %}" class="bg-yellow-600 text-white p-2 rounded transition-transform transform hover:scale-105 focus:outline-none">Go to Reward Selection</a>
+        </div>
+        {% if success_message and success_message != "None" %}
+        <p class="text-green-500 mb-4 text-center">{{ success_message }}</p>
+        {% endif %}
+
+        <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">Your Points: {{ user_points.points }}</h1>
+        <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">Uploaded PDF Files</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for pdf_file in pdf_files %}
+            <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
+                <p class="mb-4 font-semibold">{{ pdf_file.title }}</p>
+                <a href="{{ pdf_file.pdf.url }}" target="_blank" class="block mb-2 bg-blue-600 text-white rounded px-2 py-1 text-center hover:bg-blue-700 focus:outline-none">View PDF</a>
+                <a href="{{ pdf_file.pdf.url }}" download="{{ pdf_file.title }}" class="block bg-green-600 text-white rounded px-2 py-1 text-center hover:bg-green-700 focus:outline-none">Download PDF</a>
+            </div>
+            {% empty %}
+            <p class="text-center">No PDF files uploaded yet.</p>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="{% url 'upload_pdf_bme' %}" class="bg-green-600 text-white p-2 rounded transition-transform transform hover:scale-105 focus:outline-none">Upload New PDF</a>
+        </div>
+    </div>
+
+</body>
+</html>
