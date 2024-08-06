@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>4th Year</title>
+    <style>
+        /* Add custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .top-image {
+            text-align: center;
+            height: 20vh; /* Set the height to 20% of the viewport height */
+            overflow: hidden; /* Hide any overflow if the image is larger */
+        }
+
+        .top-image img {
+            max-width: 100%;
+            height: 100%; /* Make the image fill the entire top-image div */
+            object-fit: cover; /* Crop or fit the image as needed to fill the div */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        .header-container a {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .subject-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .subject-box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            width: calc(25% - 20px); /* Adjust the width as needed */
+        }
+
+        .subject-box img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Centers the image within the box */
+            margin: 0 auto; /* Centers the image horizontally */
+        }
+
+        .subject-box h3 {
+            font-size: 20px;
+        }
+
+        .subject-box p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .highlighted {
+            background-color: #FFD700;
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-cover bg-no-repeat" style="background-image: url('https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=1200')">
+    
+    <div class="top-image">
+        <img src="{% static 'css/Top_image.jpeg' %}" alt="1st Year Image" class="custom-image" style="width: 100%; height: 100%;">
+    </div>
+    
+    <div class="header-container">
+        <a href="/pdf/first">1st Year</a>
+        <a href="/pdf/second">2nd Year</a>
+        <a href="/pdf/third">3rd Year</a>
+        <a href="/pdf/fourth">4th Year</a>
+    </div>
+    <hr> <!-- Horizontal line -->
+
+    <!-- Subject boxes -->
+    <div class="subject-boxes">
+        <!-- First row of subject boxes -->
+        <div class="subject-box">
+            <img src="https://cdnsm5-ss15.sharpschool.com/UserFiles/Servers/Server_67317/Image/Electives_1.png" alt="Program elective 1 Image">
+            <h3>Program elective 1 - SEM VII </h3>
+            <p>Information about Program elective 1 </p>
+        </div>
+        <div class="subject-box">
+            <img src="https://cdnsm5-ss15.sharpschool.com/UserFiles/Servers/Server_67317/Image/Electives_1.png" alt="program elective 2 ">
+            <h3>program elective 2 - SEM VII</h3>
+            <p>Information about FProgram elective 1  </p>
+        </div>
+        <div class="subject-box">
+            <img src="https://cdnsm5-ss15.sharpschool.com/UserFiles/Servers/Server_67317/Image/Electives_1.png" alt="Program elective 3 Image">
+            <h3>Program elective 3 - SEM VII</h3>
+            <p>Information about Program elective 1 </p>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Display PDF Files</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        window.onload = function () {
+            var successMessage = "{{ success_message }}";
+            if (successMessage && successMessage !== 'None') {
+                alert(successMessage);
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-gray-100 p-8">
+
+    <form class="mb-8" method="GET">
+        <input type="text" name="prompt" class="p-2 border rounded">
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded ml-2">Ask Llama</button>
+    </form>
+
+    {% if llama_response %}
+    <div class="mb-8">
+        <h2 class="text-xl font-bold mb-4">Llama Response:</h2>
+        <p class="bg-white p-4 rounded shadow">{{ llama_response }}</p>
+    </div>
+    {% endif %}
+    <div class="mt-8">
+        <a href="{% url 'reward_selection' %}" class="bg-yellow-500 text-white p-2 rounded">Go to Reward Selection</a>
+    </div>
+    {% if success_message and success_message != "None" %}
+    <p class="text-green-500 mb-4">{{ success_message }}</p>
+    {% endif %}
+
+    <h1 class="text-2xl font-bold mb-4">Your Points: {{ user_points.points }}</h1>
+    <h1 class="text-2xl font-bold mb-4">Uploaded PDF Files</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for pdf_file in pdf_files %}
+        <div class="bg-white p-4 rounded shadow">
+            <p class="mb-4">{{ pdf_file.title }}</p>
+            <a href="{{ pdf_file.pdf.url }}" target="_blank" class="block mb-2 bg-white border rounded px-2 py-1 text-center text-blue-500 hover:bg-gray-200">View PDF</a>
+            <a href="{{ pdf_file.pdf.url }}" download="{{ pdf_file.title }}" class="block bg-white border rounded px-2 py-1 text-center text-blue-500 hover:bg-gray-200">Download PDF</a>
+        </div>
+        {% empty %}
+        <p>No PDF files uploaded yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="mt-8">
+        <a href="{% url 'upload_pdf' %}" class="bg-green-500 text-white p-2 rounded">Upload New PDF</a>
+    </div>
+
+</body>
+
+</html>

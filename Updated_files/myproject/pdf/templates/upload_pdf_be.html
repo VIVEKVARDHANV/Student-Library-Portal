@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-cover bg-no-repeat" style="background-image: url('https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=1200')">
+
+    <div class="bg-white shadow-xl rounded-lg px-10 py-8 w-full max-w-lg">
+        <h1 class="mb-6 text-2xl font-bold text-center">Upload PDF File</h1>
+        <form method="post" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 transition duration-200 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline-blue shadow-md">
+                    Upload PDF
+                </button>
+            </div>
+        </form>
+
+        <div class="mt-8 text-center">
+            <a href="{% url 'display_be' %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded-lg py-2 px-4 leading-normal no-underline text-blue-600 hover:bg-blue-100 transition duration-200">
+                Back to Display PDF
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
