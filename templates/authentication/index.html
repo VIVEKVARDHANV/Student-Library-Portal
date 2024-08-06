@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body style="background-image: url('{% static './css/Background.jpg' %}'); background-repeat: no-repeat; background-size: cover;" class="h-screen flex justify-center items-center">
+
+    <div class="w-full px-4 pt-8 flex flex-col items-center">
+        {% for message in messages %}
+        <div class="bg-blue-500 text-white px-6 py-4 rounded-lg mb-4 max-w-xl w-full shadow-md">
+            <strong class="font-bold">Message:</strong> {{ message }}
+            <button type="button" class="close ml-4 relative top-0.5 text-black" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <div class="bg-white p-8 rounded-xl shadow-md w-1/2 text-center mt-8">
+            <h3 class="text-xl font-bold mb-4">Welcome to Manipal Learn!</h3>
+
+            {% if user.is_authenticated %}
+            <h3 class="text-lg">Hello {{ fname }}!</h3>
+            <h4 class="text-green-600 mt-2 mb-4">You're successfully logged into Manipal Learn</h4>
+            {% if show_button %}
+                <a href="{% url 'first' %}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-md mb-4 hover:bg-blue-700 transform hover:scale-105 transition-transform duration-200 rounded-md">Display PDF</a>
+            {% endif %}
+            <button class="bg-red-600 text-white px-4 py-2 rounded-md"><a href="/signout" class="text-white no-underline hover:bg-red-600 transform hover:scale-105 transition-transform duration-200 rounded-md">Sign Out</a></button>
+            {% else %}
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-md mb-4"><a href="/signup" class="text-white no-underline">Sign Up</a></button>
+            <p class="text-blue-600 hover:underline"><a href="/signin">Sign In</a></p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
