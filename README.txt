@@ -18,7 +18,7 @@ The Student Library Portal is a web application designed to facilitate the manag
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/VIVEKVARDHANV/Student-Library-Portal
    cd Student-Library-Portal
    ```
 
